@@ -2,9 +2,13 @@ package br.com.fiap.fintrack.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +58,13 @@ public class MovimentacaoController {
     public Movimentacao create(@RequestBody @Valid Movimentacao movimentacao){
         return repository.save(movimentacao);
     }
+
+    @GetMapping("/ultimas")
+    public List<Movimentacao> ultimasMovimentacoes() {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("data").descending());
+        return repository.findAll(pageable).getContent();
+}
+
 
 
 }
