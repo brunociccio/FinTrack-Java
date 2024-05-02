@@ -17,5 +17,11 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long
 
     @Query("SELECT m FROM Movimentacao m WHERE MONTH(m.data) = :mes")
     Page<Movimentacao> findByDataMonth(Integer mes, Pageable pageable);
+
+    @Query("SELECT m FROM Movimentacao m WHERE m.valor = (SELECT MAX(m2.valor) FROM Movimentacao m2)")
+    Movimentacao findTopByOrderByValorDesc();
+
+    @Query("SELECT m FROM Movimentacao m WHERE m.valor = (SELECT MIN(m2.valor) FROM Movimentacao m2)")
+    Movimentacao findTopByOrderByValorAsc();
     
 }

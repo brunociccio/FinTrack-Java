@@ -63,8 +63,22 @@ public class MovimentacaoController {
     public List<Movimentacao> ultimasMovimentacoes() {
         Pageable pageable = PageRequest.of(0, 5, Sort.by("data").descending());
         return repository.findAll(pageable).getContent();
+    }
+
+    @GetMapping("/maior")
+    public Movimentacao maiorMovimentacao() {
+        return repository.findTopByOrderByValorDesc();
+    }
+
+    @GetMapping("/menor")
+    public Movimentacao menorMovimentacao() {
+        return repository.findTopByOrderByValorAsc();
+    }
+
+    @GetMapping("/ultima")
+    public Movimentacao ultimaMovimentacao() {
+        Pageable pageable = PageRequest.of(0, 1, Sort.by("data").descending());
+        return repository.findAll(pageable).getContent().get(0);
+    }
 }
 
-
-
-}
