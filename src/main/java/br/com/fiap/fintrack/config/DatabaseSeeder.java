@@ -16,14 +16,14 @@ import br.com.fiap.fintrack.repository.MovimentacaoRepository;
 @Configuration
 public class DatabaseSeeder implements CommandLineRunner {
 
-    @Autowired
-    CategoriaRepository categoriaRepository;
+@Autowired
+CategoriaRepository categoriaRepository;
 
-    @Autowired
-    MovimentacaoRepository movimentacaoRepository;
+@Autowired
+MovimentacaoRepository movimentacaoRepository;
 
-    @Override
-    public void run(String... args) throws Exception {
+@Override
+public void run(String... args) throws Exception {
 
         categoriaRepository.saveAll(
                 List.of(
